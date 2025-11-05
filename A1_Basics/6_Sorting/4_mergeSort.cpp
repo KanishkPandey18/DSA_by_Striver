@@ -2,7 +2,7 @@
 using namespace std;
 
 void merge(vector<int> &arr,int low ,int mid , int high){
-    int left = low , right = mid+1 ;
+    int left = low , right = mid+1  ;
     vector<int> temparr;
     while(left<=mid && right<=high){
         if(arr[left]<=arr[right]){
