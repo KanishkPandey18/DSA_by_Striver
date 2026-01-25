@@ -25,5 +25,5 @@ int main(){
     cin >> target;
     pair<int,int> ans = doesItExists(matrix,5,5,target);
     if(ans.first == -1) cout << "No" ;
-    else cout << "Yes it does. On the index : [" <<ans.first+1 << "][" << ans.second+1 << "]";
+    else cout << "Yes it does. On the index : [" <<ans.first+1 << "][" << ans.second+1<< "]";
 }
