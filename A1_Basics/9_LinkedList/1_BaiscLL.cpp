@@ -100,6 +100,43 @@ Node* deleteElement(Node* head, int el){
     return head;
 }
 
+Node* insertHead(Node* head,int data){
+    return new Node(data,head);
+}
+
+Node* insertTail(Node* head,int data){
+    if(head == NULL){
+        head = new Node(data);
+        return head;
+    }
+    Node* temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    temp->next = new Node(data);
+    return head;
+}
+
+Node* insertAtK(Node* head, int data, int k){
+    if(head == NULL){
+        if(k==1) return new Node(data);
+        else cout<< "List is empty Only first element can be added.";
+    }
+    if(k==1) return new Node(data,head);
+    Node* temp = head;
+    int cnt = 0;
+    while(temp!=NULL){
+        cnt++;
+        if(cnt == k-1){
+            Node* newNode = new Node(data,temp->next);
+            temp->next = newNode;
+            return head;
+        }
+        temp = temp->next;
+    }
+    return head;    
+}
+
 int main()
 {
     int k,el;
@@ -110,9 +147,12 @@ int main()
     // cout<< "Give K : " ;
     // cin >> k;
     // if(k<=arr.size()) head = deleteKElement(head,4);
-    cout<< "Give el : " ;
-    cin >> el;
-    head = deleteElement(head,el);
+    // cout<< "Give el : " ;
+    // cin >> el;
+    // head = deleteElement(head,el);
+    head = insertHead(head,100);
+    head = insertTail(head,200);
+    head = insertAtK(head,150,4);
     lengthAndDisplayLL(head);
     
 }
