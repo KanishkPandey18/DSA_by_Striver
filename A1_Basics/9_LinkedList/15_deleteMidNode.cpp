@@ -40,48 +40,27 @@ void lengthAndDisplayLL(Node *head)
         cout << temp->data << " ";
         temp = temp->next;
     }
-    cout << endl <<  "Lenght is : " << cnt << endl;
+    cout << endl <<  "Lenght is : " << cnt;
 }
 
-Node* reverseLL(Node* head){
-    if(head == NULL || head->next==NULL) return head;
-    Node* prev = NULL;
-    Node* temp = head;
-    while(temp!=NULL){
-        Node* front = temp->next;
-        temp->next = prev;
-        prev = temp;
-        temp=front; 
-    }
-    return prev;
-}
-
-bool palindrome(Node* head){
-    Node* temp = head;
+Node* deleteMidPoint(Node* head){
+    if(head == NULL || head->next == NULL) return NULL; 
     Node* slow = head;
     Node* fast = head;
-    while(fast->next && fast->next->next){
+    Node* temp = NULL;
+    while(fast && fast->next){
+        temp = slow;
         slow = slow->next;
         fast = fast->next->next;
     }
-    Node* newHead = reverseLL(slow->next);
-    Node* temp2 = newHead; 
-    while(temp2!=NULL){
-        if(temp->data!=temp2->data){
-            reverseLL(newHead);
-            return false;
-        }
-        temp = temp->next;
-        temp2 = temp2->next;
-    }
-    reverseLL(newHead);
-    return true;
+    temp->next = slow->next;
+    delete slow;
+    return head;
 }
 
 int main(){
-    vector<int> arr = {1,1,2,3,3,2,1,1};
+    vector<int> arr = {1,2,3,4,5};
     Node* head = arrayToLL(arr);
-    bool ans = palindrome(head);
+    head = deleteMidPoint(head);
     lengthAndDisplayLL(head);
-    ans? cout << "true" : cout<< "false" ;
 }

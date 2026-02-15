@@ -43,22 +43,34 @@ void lengthAndDisplayDLL(Node* head){
     cout << endl <<"Length is : " << cnt;
 }
 
-Node* reverseDLL(Node* head){
-    if(head==NULL || head->next == NULL) return head;
-    Node* prev = NULL;
-    Node* current = head;
-    while(current!=NULL){
-        prev = current->back;
-        current->back = current->next;
-        current->next = prev;
-        current = current->back;
+Node* deleteAllOccurances(Node* head,int key){
+    while(head && head->data == key){
+            Node* lostHead = head;                      //10,4,10,10,6,10
+            head = head->next;
+            if(head)head->back = NULL;
+            delete lostHead;
     }
-    return prev->back;
+    Node* temp = head;
+    while(temp!=NULL){
+        if(temp->data == key){
+            Node* front = temp->next;
+            Node* prev = temp->back;
+            if(prev!=NULL)prev->next = front;
+            if(front!=NULL)front->back = prev;
+            delete temp;
+            temp = front;
+        }
+        else temp = temp->next;
+    }
+    return head;
 }
 
 int main(){
-    vector<int> arr = {2, 5, 6, 7, 8, 10};
+    int k;
+    cout<< "Give element : ";
+    cin >> k;
+    vector<int> arr = {10,4,10,10,6,10};
     Node* head = arrayToDLL(arr);
-    head = reverseDLL(head);
+    head = deleteAllOccurances(head,k);
     lengthAndDisplayDLL(head);
 }

@@ -43,22 +43,22 @@ void lengthAndDisplayDLL(Node* head){
     cout << endl <<"Length is : " << cnt;
 }
 
-Node* reverseDLL(Node* head){
-    if(head==NULL || head->next == NULL) return head;
-    Node* prev = NULL;
-    Node* current = head;
-    while(current!=NULL){
-        prev = current->back;
-        current->back = current->next;
-        current->next = prev;
-        current = current->back;
+Node* check(Node* head1,Node* head2){
+    if(head1 == NULL || head2 == NULL) return NULL;
+    Node* temp1 = head1;
+    Node* temp2 = head2;
+    while(temp1 != temp2) {
+        temp1 = (temp1 == NULL) ? head2 : temp1->next;
+        temp2 = (temp2 == NULL) ? head1 : temp2->next;
     }
-    return prev->back;
+    return temp1;;
 }
 
 int main(){
-    vector<int> arr = {2, 5, 6, 7, 8, 10};
-    Node* head = arrayToDLL(arr);
-    head = reverseDLL(head);
-    lengthAndDisplayDLL(head);
+    vector<int> arr1 = {3,1,4,6,2};
+    Node* head1 = arrayToDLL(arr1);
+    vector<int> arr2 = {1,2,4,5,4,6,2};
+    Node* head2 = arrayToDLL(arr2); 
+    Node* ans = check(head1,head2);
+    cout << ans->data;
 }

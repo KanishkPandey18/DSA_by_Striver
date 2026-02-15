@@ -1,9 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#include<bits/stdc++.h>
-using namespace std;
-
 class Node
 {
 public:
@@ -53,10 +50,13 @@ Node* insertHead(Node* head,int data){
 int addition(Node* head){
     if(head == NULL) return 1;
     int carry = addition(head->next);
-    int sum = head->data + carry;
-    head->data = sum%10;
-    carry = sum/10;
-    return carry;
+    if(carry){
+        int sum = head->data + carry;
+        head->data = sum%10;
+        carry = sum/10;
+        return carry;
+    }
+    else return carry;
 }
 
 Node* add1(Node* head){
@@ -66,7 +66,7 @@ Node* add1(Node* head){
 }
 
 int main(){
-    vector<int> arr = {9,9,9};
+    vector<int> arr = {8,9,9}; 
     Node* head = arrayToLL(arr);
     head = add1(head);
     lengthAndDisplayLL(head);
