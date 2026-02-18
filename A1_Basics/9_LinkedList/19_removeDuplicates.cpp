@@ -43,19 +43,16 @@ void lengthAndDisplayDLL(Node* head){
     cout << endl <<"Length is : " << cnt;
 }
 
-Node* deleteAllOccurances(Node* head,int key){
+Node* removeDuplicates(Node* head){
+    if(head==NULL || head->next == NULL) return head;
     Node* temp = head;
-    while(temp!=NULL){
-        if(temp->data == key){
-            if(temp == head){
-                head = head->next;
-            }
-            Node* front = temp->next;
-            Node* prev = temp->back;
-            if(prev!=NULL)prev->next = front;
-            if(front!=NULL)front->back = prev;
-            delete temp;
-            temp = front;
+    while(temp != NULL && temp->next!=NULL){
+        Node* front = temp->next;
+        if(front->data == temp->data){
+            Node* front1 = front->next; 
+            temp->next = front1;
+            if(front1 != NULL)front1->back = temp;
+            delete front;
         }
         else temp = temp->next;
     }
@@ -63,11 +60,8 @@ Node* deleteAllOccurances(Node* head,int key){
 }
 
 int main(){
-    int k;
-    cout<< "Give element : ";
-    cin >> k;
-    vector<int> arr = {10,4,10,10,6,10};
+    vector<int> arr = {1,1,1,2,3,3,4,4};
     Node* head = arrayToDLL(arr);
-    head = deleteAllOccurances(head,k);
+    head = removeDuplicates(head);
     lengthAndDisplayDLL(head);
 }
