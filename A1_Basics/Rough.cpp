@@ -13,6 +13,6 @@ int main() {
     // std::cout << "The address stored in the pointer is: " << ptr << std::endl;
     // std::cout << "The value at the address (dereferenced) is: " << dereferenced_value << std::endl;
     int sum = 10;
-    cout << sum << endl << sum%10;
+    cout << 15%7;
     return 0;
 }
